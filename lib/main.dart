@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:icecream/models/repository/icecream_repository.dart';
 import 'package:icecream/models/repository/icecream_repository_dummy_impl.dart';
-import 'package:icecream/views/button_widget.dart';
-import 'package:icecream/views/flavours_widget.dart';
+import 'package:icecream/views/home_widget.dart';
 
 void main() {
 
@@ -23,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const FlavoursWidget(),
+      home: const HomeWidget(),
     );
   }
 }

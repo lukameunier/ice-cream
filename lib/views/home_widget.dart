@@ -12,16 +12,25 @@ class HomeWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(child:
-              Text(
-                "Ice cream",
-                style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1),
-              )),
+            Text("Ice cream"),
+            const SizedBox(height: 16),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
                 Text("Scoop flavours"),
-                FlavoursWidget()
+                Text("maximum 5"),
+              ],
+            ),
+
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                FlavoursWidget(),
+                FlavoursWidget(),
+                FlavoursWidget(),
+                FlavoursWidget(),
+                FlavoursWidget(),
               ],
             ),
           ],
