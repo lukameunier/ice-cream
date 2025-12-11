@@ -7,6 +7,7 @@ class HomeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -42,11 +43,9 @@ class HomeWidget extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
-                FlavoursWidget(),
-                FlavoursWidget(),
-                FlavoursWidget(),
-                FlavoursWidget(),
-                FlavoursWidget(),
+                FlavoursWidget(imagePath: "chocolate.jpg", flavourName: "Chocolate"),
+                FlavoursWidget(imagePath: "pistachio.jpg", flavourName: "Pistachio"),
+                FlavoursWidget(imagePath: "vanilla.jpg", flavourName: "Vanilla"),
               ],
             ),
 
@@ -93,6 +92,7 @@ class HomeWidget extends StatelessWidget {
             ),
 
             ElevatedButton(onPressed: null, child: Text("Icecream so good !!!"))
+
           ],
         ),
       ),

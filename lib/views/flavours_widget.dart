@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import 'button_widget.dart';
 
 class FlavoursWidget extends StatelessWidget {
-  const FlavoursWidget({super.key});
+
+  final String imagePath;
+  final String flavourName;
+
+  const FlavoursWidget({super.key, required this.imagePath, required this.flavourName});
 
   @override
   Widget build(BuildContext context) {
@@ -14,14 +18,20 @@ class FlavoursWidget extends StatelessWidget {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
+            children: [
               Image(
-                image: AssetImage("assets/chocolate.jpg"),
+                image: AssetImage("${"assets/"}$imagePath"),
                 height: 50,
               ),
-              Text("Chocolate"),
-              ButtonWidget(),
-              Text("Zebi")
+              Text(
+                flavourName,
+                style: TextStyle(fontSize: 20),
+              ),
+              const ButtonWidget(),
+              Text(
+                "1",
+                style: TextStyle(fontSize: 20),
+              ),
             ],
           ),
         ],
