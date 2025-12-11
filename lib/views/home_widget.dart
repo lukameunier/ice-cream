@@ -12,14 +12,30 @@ class HomeWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Ice cream"),
+            Text(
+              "Ice cream",
+              style: TextStyle(fontSize: 45),
+            ),
             const SizedBox(height: 16),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
-                Text("Scoop flavours"),
-                Text("maximum 5"),
+                Text(
+                  "Scoop flavours",
+                  style: TextStyle(fontSize: 30),
+                  textAlign: TextAlign.start,
+                ),
+                Text(
+                  "maximum 5",
+                  style:
+                    TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold
+                    ),
+                  textAlign: TextAlign.end,
+
+                ),
               ],
             ),
 
@@ -33,6 +49,50 @@ class HomeWidget extends StatelessWidget {
                 FlavoursWidget(),
               ],
             ),
+
+            Text(
+              "Cone or cup",
+              style: TextStyle(fontSize: 30),
+              textAlign: TextAlign.start,
+            ),
+            Column(
+              children: [
+
+              ],
+            ),
+
+            Text(
+              "Extras",
+              style: TextStyle(fontSize: 30),
+              textAlign: TextAlign.start,
+            ),
+            Column(
+              children: [
+
+              ],
+            ),
+
+            Row(
+              children: [
+                Text(
+                  "Price",
+                  style: TextStyle(fontSize: 30),
+                  textAlign: TextAlign.start,
+                ),
+                Expanded(child: const SizedBox()),
+                Text(
+                  "25€",
+                  style:
+                    TextStyle(
+                        fontSize: 30,
+                      fontWeight: FontWeight.bold
+                    ),
+                  textAlign: TextAlign.start,
+                ),
+              ],
+            ),
+
+            ElevatedButton(onPressed: null, child: Text("Icecream so good !!!"))
           ],
         ),
       ),
