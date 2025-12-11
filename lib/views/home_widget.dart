@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:icecream/views/extras_widget.dart';
 import 'package:icecream/views/flavours_widget.dart';
 
 class HomeWidget extends StatelessWidget {
@@ -17,6 +18,7 @@ class HomeWidget extends StatelessWidget {
               "Ice cream",
               style: TextStyle(fontSize: 45),
             ),
+
             const SizedBox(height: 16),
 
             Row(
@@ -67,7 +69,8 @@ class HomeWidget extends StatelessWidget {
             ),
             Column(
               children: [
-
+                ExtrasWidget(extrasName: "Whipped cream", price: 1.00),
+                ExtrasWidget(extrasName: "Sprinkles", price: 0.50)
               ],
             ),
 
@@ -80,7 +83,7 @@ class HomeWidget extends StatelessWidget {
                 ),
                 Expanded(child: const SizedBox()),
                 Text(
-                  "25€",
+                  "2500€",
                   style:
                     TextStyle(
                         fontSize: 30,
@@ -91,8 +94,22 @@ class HomeWidget extends StatelessWidget {
               ],
             ),
 
-            ElevatedButton(onPressed: null, child: Text("Icecream so good !!!"))
+            const SizedBox(height: 32),
 
+            Row(
+              children: [
+                Spacer(),
+                ElevatedButton(
+                  onPressed: null,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    foregroundColor: Colors.white,
+                  ),
+                  child: Text("Icecream so good !!!"),
+                ),
+                Spacer(),
+              ],
+            ),
           ],
         ),
       ),
