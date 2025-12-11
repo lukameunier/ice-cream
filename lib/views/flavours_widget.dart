@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'button_widget.dart';
+
 class FlavoursWidget extends StatelessWidget {
   const FlavoursWidget({super.key});
 
@@ -19,16 +21,7 @@ class FlavoursWidget extends StatelessWidget {
                   height: 75,
                 ),
                 Text("Chocolate"),
-                ElevatedButton(
-                  onPressed: null,
-                  child: Text("Add"),
-
-                ),
-                ElevatedButton(
-                    onPressed: null,
-                    child: Text("Add")
-                    
-                ),
+                ButtonWidget(),
                 Text("Zebi")
               ],
             ),
