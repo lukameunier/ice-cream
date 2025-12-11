@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:icecream/views/extras_widget.dart';
-import 'package:icecream/views/flavours_widget.dart';
+import 'package:icecream/views/widgets/extras_widget.dart';
+import 'package:icecream/views/widgets/flavours_widget.dart';
 
-class HomeWidget extends StatelessWidget {
-  const HomeWidget({super.key});
+class HomePageWidget extends StatelessWidget {
+  const HomePageWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
