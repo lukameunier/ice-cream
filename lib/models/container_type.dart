@@ -1,0 +1,4 @@
+enum ContainerType {
+  cone,
+  cup
+}
