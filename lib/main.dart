@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:icecream/models/repository/icecream_repository.dart';
-import 'package:icecream/models/repository/icecream_repository_dummy_impl.dart';
+import 'package:icecream/models/repository/stock_repository.dart';
+import 'package:icecream/models/repository/stock_repository_dummy_impl.dart';
 import 'package:icecream/views/pages/home_page_widget.dart';
 
 void main() {
 
-  GetIt.instance.registerSingleton<IcecreamRepository>(IcecreamRepositoryDummyImpl());
+  GetIt.instance.registerSingleton<StockRepository>(StockRepositoryImpl());
 
   runApp(const MyApp());
 }
