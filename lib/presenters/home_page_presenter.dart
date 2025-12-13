@@ -18,9 +18,10 @@ class HomePagePresenter extends ChangeNotifier {
   List<Extra> get extras => _repository.extras;
   List<IcecreamContainer> get containers => _repository.containers;
 
-  int get totalScoops => _selectedScoops.values.fold(0, (sum, count) => sum + count);
+  int get totalScoops =>
+      _selectedScoops.values.fold(0, (sum, count) => sum + count);
   bool get canAddScoop => totalScoops < 5;
-  bool get canMakeIcecream => totalScoops > 0;
+  bool get canMakeIcecream => totalScoops > 0 && totalScoops <= 5;
   ContainerType get selectedContainer => _selectedContainer;
 
   int getScoopCount(String flavourId) => _selectedScoops[flavourId] ?? 0;
@@ -31,7 +32,9 @@ class HomePagePresenter extends ChangeNotifier {
 
     double price = PricingService.scoopPrices[totalScoops] ?? 0;
 
-    final container = containers.firstWhere((c) => c.type == _selectedContainer);
+    final container = containers.firstWhere(
+      (c) => c.type == _selectedContainer,
+    );
     price += container.price;
 
     for (final extraId in _selectedExtras) {
@@ -98,5 +101,10 @@ class HomePagePresenter extends ChangeNotifier {
     _selectedContainer = ContainerType.cup;
     _selectedExtras.clear();
     notifyListeners();
+  }
+
+  void onContainerChanged(ContainerType? value) {
+    if (value == null) return;
+    selectContainer(value);
   }
 }

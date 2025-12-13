@@ -1,27 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../presenters/home_page_presenter.dart';
 
 class ExtrasWidget extends StatelessWidget {
-
+  final String extraId;
   final String extrasName;
   final double price;
 
-  const ExtrasWidget({super.key, required this.extrasName, required this.price});
+  const ExtrasWidget({
+    super.key,
+    required this.extraId,
+    required this.extrasName,
+    required this.price,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final presenter = context.watch<HomePagePresenter>();
+    final isEnabled = presenter.totalScoops > 0;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Checkbox(value: false, onChanged: null),
+        Checkbox(
+          value: presenter.isExtraSelected(extraId),
+          onChanged: isEnabled ? (_) => presenter.toggleExtra(extraId) : null,
+        ),
         Text(
           extrasName,
-          style: TextStyle(fontSize: 20),
+          style: TextStyle(
+            fontSize: 20,
+            color: isEnabled ? Colors.black : Colors.grey,
+          ),
         ),
-        Expanded(child: Spacer()),
+        Spacer(),
         Text(
-          "$price€",
-          style: TextStyle(fontSize: 20),
-        )
+          "${price.toStringAsFixed(2)}€",
+          style: TextStyle(
+            fontSize: 20,
+            color: isEnabled ? Colors.black : Colors.grey,
+          ),
+        ),
       ],
     );
   }

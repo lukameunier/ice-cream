@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:icecream/views/widgets/extras_widget.dart';
 import 'package:icecream/views/widgets/flavours_widget.dart';
+import 'package:provider/provider.dart';
+
+import '../../models/container_type.dart';
+import '../../presenters/home_page_presenter.dart';
 
 class HomePageWidget extends StatelessWidget {
   const HomePageWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final presenter = context.watch<HomePagePresenter>();
+
+    final enabled = presenter.totalScoops > 0;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -15,50 +23,108 @@ class HomePageWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Ice cream",
-                style: TextStyle(fontSize: 45),
-              ),
+              Text("Ice cream", style: TextStyle(fontSize: 45)),
 
               const SizedBox(height: 16),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text(
-                    "Scoop flavours",
+                children: [
+                  const Text(
+                    "Flavours",
                     style: TextStyle(fontSize: 30),
                     textAlign: TextAlign.start,
                   ),
-                  Text(
-                    "maximum 5",
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold
-                    ),
-                    textAlign: TextAlign.end,
-                  ),
+                  presenter.canAddScoop
+                      ? const Text(
+                          "maximum 5",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.end,
+                        )
+                      : const Text(
+                          "Too many scooped",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red,
+                          ),
+                          textAlign: TextAlign.end,
+                        ),
                 ],
               ),
 
               Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  FlavoursWidget(imagePath: "chocolate.jpg", flavourName: "Chocolate"),
-                  FlavoursWidget(imagePath: "pistachio.jpg", flavourName: "Pistachio"),
-                  FlavoursWidget(imagePath: "vanilla.jpg", flavourName: "Vanilla"),
-                ],
+                children: presenter.flavours
+                    .map(
+                      (flavour) => FlavoursWidget(
+                        flavourId: flavour.id,
+                        imagePath: flavour.imagePath.replaceFirst(
+                          'assets/',
+                          '',
+                        ),
+                        flavourName: flavour.name,
+                      ),
+                    )
+                    .toList(),
               ),
 
               Text(
-                "Cone or cup",
+                "Containers",
                 style: TextStyle(fontSize: 30),
                 textAlign: TextAlign.start,
               ),
-              Column(
-                children: [
 
-                ],
+              RadioGroup<ContainerType>(
+                groupValue: presenter.selectedContainer,
+                onChanged: enabled ? presenter.onContainerChanged : (_) {},
+
+                child: Column(
+                  children: presenter.containers
+                      .map(
+                        (container) => Row(
+                          children: [
+                            Radio<ContainerType>(
+                              value: container.type,
+
+                              enabled: enabled,
+                              fillColor:
+                                  WidgetStateProperty.resolveWith<Color?>((
+                                    states,
+                                  ) {
+                                    if (states.contains(WidgetState.disabled)) {
+                                      return Colors.grey;
+                                    }
+                                    return Colors.blue;
+                                  }),
+                            ),
+
+                            Text(
+                              container.type == ContainerType.cone
+                                  ? "Cone"
+                                  : "Cup",
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: enabled ? Colors.black : Colors.grey,
+                              ),
+                            ),
+                            const Spacer(),
+                            Text(
+                              container.price > 0
+                                  ? "${container.price.toStringAsFixed(2)}€"
+                                  : "Free",
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: enabled ? Colors.black : Colors.grey,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                      .toList(),
+                ),
               ),
 
               Text(
@@ -67,10 +133,15 @@ class HomePageWidget extends StatelessWidget {
                 textAlign: TextAlign.start,
               ),
               Column(
-                children: [
-                  ExtrasWidget(extrasName: "Whipped cream", price: 1.00),
-                  ExtrasWidget(extrasName: "Sprinkles", price: 0.50)
-                ],
+                children: presenter.extras
+                    .map(
+                      (extra) => ExtrasWidget(
+                        extraId: extra.id,
+                        extrasName: extra.name,
+                        price: extra.price,
+                      ),
+                    )
+                    .toList(),
               ),
 
               const Spacer(),
@@ -84,11 +155,8 @@ class HomePageWidget extends StatelessWidget {
                   ),
                   Expanded(child: const SizedBox()),
                   Text(
-                    "2500€",
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold
-                    ),
+                    "${presenter.totalPrice.toString()} €",
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                     textAlign: TextAlign.start,
                   ),
                 ],
@@ -100,7 +168,9 @@ class HomePageWidget extends StatelessWidget {
                 children: [
                   Spacer(),
                   ElevatedButton(
-                    onPressed: null,
+                    onPressed: presenter.canMakeIcecream
+                        ? () => presenter.makeIcecream()
+                        : null,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
                       foregroundColor: Colors.white,
