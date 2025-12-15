@@ -39,7 +39,7 @@ class HomePageWidget extends StatelessWidget {
                     style: TextStyle(fontSize: fontSizeMedium),
                     textAlign: TextAlign.start,
                   ),
-                  presenter.canAddScoop
+                  !presenter.tooManyScoop
                       ? Text(
                           "maximum 5",
                           style: TextStyle(

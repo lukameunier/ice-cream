@@ -21,6 +21,7 @@ class HomePagePresenter extends ChangeNotifier {
   int get totalScoops =>
       _selectedScoops.values.fold(0, (sum, count) => sum + count);
   bool get canAddScoop => totalScoops < 5;
+  bool get tooManyScoop => totalScoops > 5;
   bool get canMakeIcecream => totalScoops > 0 && totalScoops <= 5;
   ContainerType get selectedContainer => _selectedContainer;
 
@@ -46,7 +47,7 @@ class HomePagePresenter extends ChangeNotifier {
   }
 
   void addScoop(String flavourId) {
-    if (!canAddScoopForFlavour(flavourId)) return;
+    if (getAvailableScoops(flavourId) <= 0) return;
 
     _selectedScoops[flavourId] = getScoopCount(flavourId) + 1;
     notifyListeners();
@@ -114,7 +115,7 @@ class HomePagePresenter extends ChangeNotifier {
   }
 
   bool canAddScoopForFlavour(String flavourId) {
-    return getAvailableScoops(flavourId) > 0 && canAddScoop;
+    return getAvailableScoops(flavourId) > 0;
   }
 
   Flavour getFlavourById(String flavourId) {

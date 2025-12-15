@@ -12,7 +12,7 @@ class ButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final presenter = context.watch<HomePagePresenter>();
     final scoopCount = presenter.getScoopCount(flavourId);
-    final canAdd = presenter.canAddScoop;
+    final canAdd = presenter.canAddScoopForFlavour(flavourId);
 
     return Container(
       decoration: BoxDecoration(
