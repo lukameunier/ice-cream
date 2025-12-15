@@ -38,30 +38,30 @@ class FlavoursWidget extends StatelessWidget {
               const SizedBox(width: 8),
               presenter.getAvailableScoops(flavourId) > 0
                   ? SizedBox(
-                width: 40,
-                child: Text(
-                  presenter.getScoopCount(flavourId).toString(),
-                  style: TextStyle(fontSize: fontSize),
-                  textAlign: TextAlign.center,
-                ),
-              )
+                      width: 40,
+                      child: Text(
+                        presenter.getScoopCount(flavourId).toString(),
+                        style: TextStyle(fontSize: fontSize),
+                        textAlign: TextAlign.center,
+                      ),
+                    )
                   : ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  foregroundColor: Colors.white,
-                  shape: const CircleBorder(),
-                  padding: EdgeInsets.zero,
-                  minimumSize: const Size(40, 40),
-                ),
-                onPressed: () {
-                  Navigator.pushNamed(
-                    context,
-                    '/details',
-                    arguments: presenter.getFlavourById(flavourId),
-                  );
-                },
-                child: const Icon(Icons.highlight_off, size: 20),
-              ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.red,
+                        foregroundColor: Colors.white,
+                        shape: const CircleBorder(),
+                        padding: EdgeInsets.zero,
+                        minimumSize: const Size(40, 40),
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          '/details',
+                          arguments: presenter.getFlavourById(flavourId),
+                        );
+                      },
+                      child: const Icon(Icons.highlight_off, size: 20),
+                    ),
             ],
           ),
         ],

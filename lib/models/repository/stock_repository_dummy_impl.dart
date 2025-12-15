@@ -7,15 +7,44 @@ import 'stock_repository.dart';
 class StockRepositoryImpl implements StockRepository {
   @override
   List<Flavour> flavours = [
-    Flavour(id: 'chocolate', name: 'Chocolate', imagePath: 'assets/chocolate.jpg', stockMl: 300),
-    Flavour(id: 'vanilla', name: 'Vanilla', imagePath: 'assets/vanilla.jpg', stockMl: 100),
-    Flavour(id: 'pistachio', name: 'Pistachio', imagePath: 'assets/pistachio.jpg', stockMl: 0),
+    Flavour(
+      id: 'chocolate',
+      name: 'Chocolate',
+      imagePath: 'assets/chocolate.jpg',
+      stockMl: 300,
+    ),
+    Flavour(
+      id: 'vanilla',
+      name: 'Vanilla',
+      imagePath: 'assets/vanilla.jpg',
+      stockMl: 100,
+    ),
+    Flavour(
+      id: 'pistachio',
+      name: 'Pistachio',
+      imagePath: 'assets/pistachio.jpg',
+      stockMl: 0,
+    ),
   ];
 
   @override
   List<Extra> extras = [
-    Extra(id: 'whipped_cream', name: 'Whipped cream', price: 0.95, unit: 'ml', consumptionPerUse: 75, stock: 150),
-    Extra(id: 'hazelnuts', name: 'Hazelnuts', price: 0.95, unit: 'g', consumptionPerUse: 5, stock: 100),
+    Extra(
+      id: 'whipped_cream',
+      name: 'Whipped cream',
+      price: 0.95,
+      unit: 'ml',
+      consumptionPerUse: 75,
+      stock: 150,
+    ),
+    Extra(
+      id: 'hazelnuts',
+      name: 'Hazelnuts',
+      price: 0.95,
+      unit: 'g',
+      consumptionPerUse: 5,
+      stock: 100,
+    ),
   ];
 
   @override

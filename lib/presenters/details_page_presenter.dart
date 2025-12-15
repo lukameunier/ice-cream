@@ -19,7 +19,6 @@ class DetailsPresenter extends ChangeNotifier {
 
   DetailsPresenter(this._stockRepository);
 
-  // Getters
   bool get showAllItems => _showAllItems;
   String get signature => _signature;
   Flavour? get flavour => _flavour;
@@ -34,8 +33,8 @@ class DetailsPresenter extends ChangeNotifier {
 
   bool get hasSelection =>
       _selectedFlavours.isNotEmpty ||
-          _selectedContainers.isNotEmpty ||
-          _selectedExtras.isNotEmpty;
+      _selectedContainers.isNotEmpty ||
+      _selectedExtras.isNotEmpty;
 
   bool get isFirstOrderButtonEnabled => !_showAllItems;
 
@@ -93,10 +92,12 @@ class DetailsPresenter extends ChangeNotifier {
 
     final subject = Uri.encodeComponent("Order");
     final body = Uri.encodeComponent(
-        "Hi,\nPlease order the following:\n* ${_flavour!.name} icecream\n$_signature"
+      "Hi,\nPlease order the following:\n* ${_flavour!.name} icecream\n$_signature",
     );
 
-    final uri = Uri.parse("mailto:order@icecream.com?subject=$subject&body=$body");
+    final uri = Uri.parse(
+      "mailto:order@icecream.com?subject=$subject&body=$body",
+    );
 
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
@@ -119,10 +120,12 @@ class DetailsPresenter extends ChangeNotifier {
     final itemsList = items.map((e) => "* $e").join("\n");
     final subject = Uri.encodeComponent("Order");
     final body = Uri.encodeComponent(
-        "Hi,\nPlease order the following:\n$itemsList\n$_signature"
+      "Hi,\nPlease order the following:\n$itemsList\n$_signature",
     );
 
-    final uri = Uri.parse("mailto:order@icecream.com?subject=$subject&body=$body");
+    final uri = Uri.parse(
+      "mailto:order@icecream.com?subject=$subject&body=$body",
+    );
 
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);

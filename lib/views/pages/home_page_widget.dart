@@ -158,7 +158,10 @@ class HomePageWidget extends StatelessWidget {
                   Expanded(child: const SizedBox()),
                   Text(
                     "${presenter.totalPrice.toString()} €",
-                    style: TextStyle(fontSize: fontSizeMedium, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: fontSizeMedium,
+                      fontWeight: FontWeight.bold,
+                    ),
                     textAlign: TextAlign.start,
                   ),
                 ],

@@ -17,7 +17,6 @@ class ExtrasWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final double fontSize = 15;
 
     final presenter = context.watch<HomePagePresenter>();
