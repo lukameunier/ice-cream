@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:icecream/models/repository/stock_repository.dart';
 import 'package:icecream/models/repository/stock_repository_dummy_impl.dart';
 import 'package:icecream/presenters/home_page_presenter.dart';
+import 'package:icecream/views/pages/details_page_widget.dart';
 import 'package:icecream/views/pages/home_page_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +29,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const HomePageWidget(),
+      initialRoute: '/home',
+      routes: {
+        '/home': (context) => HomePageWidget(),
+        '/details': (context) => DetailsPageWidget(),
+      },
     );
   }
 }

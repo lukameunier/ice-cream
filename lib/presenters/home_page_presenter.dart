@@ -117,4 +117,7 @@ class HomePagePresenter extends ChangeNotifier {
     return getAvailableScoops(flavourId) > 0 && canAddScoop;
   }
 
+  Flavour getFlavourById(String flavourId) {
+    return flavours.firstWhere((f) => f.id == flavourId);
+  }
 }

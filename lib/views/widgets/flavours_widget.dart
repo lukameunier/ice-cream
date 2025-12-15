@@ -46,7 +46,9 @@ class FlavoursWidget extends StatelessWidget {
                       shape: CircleBorder(),
                       padding: EdgeInsets.all(12),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/details', arguments: presenter.getFlavourById(flavourId));
+                    },
                     child: Icon(Icons.highlight_off),
                   ),
             ],
