@@ -14,7 +14,8 @@ class DetailsPageWidget extends StatelessWidget {
     final flavour = ModalRoute.of(context)!.settings.arguments as Flavour;
 
     return ChangeNotifierProvider(
-      create: (context) => DetailsPresenter(GetIt.instance<StockRepository>())..init(flavour),
+      create: (context) =>
+          DetailsPresenter(GetIt.instance<StockRepository>())..init(flavour),
       child: const _DetailsPageContent(),
     );
   }
@@ -35,10 +36,16 @@ class _DetailsPageContent extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(presenter.flavour!.name, style: const TextStyle(fontSize: 35)),
+              Text(
+                presenter.flavour!.name,
+                style: const TextStyle(fontSize: 35),
+              ),
               Row(
                 children: [
-                  Image(image: AssetImage(presenter.flavour!.imagePath), height: 100),
+                  Image(
+                    image: AssetImage(presenter.flavour!.imagePath),
+                    height: 100,
+                  ),
                   const SizedBox(width: 16),
                   Expanded(
                     child: Text(
@@ -58,16 +65,20 @@ class _DetailsPageContent extends StatelessWidget {
                         border: OutlineInputBorder(),
                       ),
                       onChanged: presenter.updateSignature,
-                      controller: TextEditingController(text: presenter.signature),
+                      controller: TextEditingController(
+                        text: presenter.signature,
+                      ),
                     ),
                   ),
                   const SizedBox(width: 16),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.grey[300],
-                      foregroundColor: Colors.black87,
+                      backgroundColor: Colors.blue,
+                      foregroundColor: Colors.white,
                     ),
-                    onPressed: presenter.sendOrder,
+                    onPressed: presenter.isFirstOrderButtonEnabled
+                        ? presenter.sendOrder
+                        : null,
                     child: const Text("Order"),
                   ),
                 ],
@@ -82,7 +93,11 @@ class _DetailsPageContent extends StatelessWidget {
                     foregroundColor: Colors.white,
                   ),
                   onPressed: presenter.toggleShowAllItems,
-                  child: Text(presenter.showAllItems ? "Collapse other items" : "Check all items"),
+                  child: Text(
+                    presenter.showAllItems
+                        ? "Collapse other items"
+                        : "Check all items",
+                  ),
                 ),
               ),
 
@@ -91,25 +106,38 @@ class _DetailsPageContent extends StatelessWidget {
                 Expanded(
                   child: ListView(
                     children: [
-                      ...presenter.flavours.map((f) => _StockItem(
-                        label: f.name,
-                        stock: "${f.stockMl} ml",
-                        isSelected: presenter.isFlavourSelected(f.name),
-                        isDisabled: presenter.isFlavourDisabled(f.name),
-                        onChanged: () => presenter.toggleFlavourSelection(f.name),
-                      )),
-                      ...presenter.containers.map((c) => _StockItem(
-                        label: c.type.name,
-                        stock: "${c.stock}",
-                        isSelected: presenter.isContainerSelected(c.type.name),
-                        onChanged: () => presenter.toggleContainerSelection(c.type.name),
-                      )),
-                      ...presenter.extras.map((e) => _StockItem(
-                        label: e.name,
-                        stock: e.unit == "ml" ? "${e.stock} ml" : "${e.stock} g",
-                        isSelected: presenter.isExtraSelected(e.name),
-                        onChanged: () => presenter.toggleExtraSelection(e.name),
-                      )),
+                      ...presenter.flavours.map(
+                        (f) => _StockItem(
+                          label: f.name,
+                          stock: "${f.stockMl} ml",
+                          isSelected: presenter.isFlavourSelected(f.name),
+                          isDisabled: presenter.isFlavourDisabled(f.name),
+                          onChanged: () =>
+                              presenter.toggleFlavourSelection(f.name),
+                        ),
+                      ),
+                      ...presenter.containers.map(
+                        (c) => _StockItem(
+                          label: c.type.name,
+                          stock: "${c.stock}",
+                          isSelected: presenter.isContainerSelected(
+                            c.type.name,
+                          ),
+                          onChanged: () =>
+                              presenter.toggleContainerSelection(c.type.name),
+                        ),
+                      ),
+                      ...presenter.extras.map(
+                        (e) => _StockItem(
+                          label: e.name,
+                          stock: e.unit == "ml"
+                              ? "${e.stock} ml"
+                              : "${e.stock} g",
+                          isSelected: presenter.isExtraSelected(e.name),
+                          onChanged: () =>
+                              presenter.toggleExtraSelection(e.name),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -158,14 +186,12 @@ class _StockItem extends StatelessWidget {
           Checkbox(
             value: isSelected,
             onChanged: isDisabled ? null : (_) => onChanged(),
-            activeColor: const Color(0xFF6B5B95),
+            activeColor: Colors.blue,
           ),
           Expanded(
             child: Text(
               label,
-              style: TextStyle(
-                color: isDisabled ? Colors.grey : Colors.black,
-              ),
+              style: TextStyle(color: isDisabled ? Colors.grey : Colors.black),
             ),
           ),
           Text(stock),

@@ -37,6 +37,8 @@ class DetailsPresenter extends ChangeNotifier {
           _selectedContainers.isNotEmpty ||
           _selectedExtras.isNotEmpty;
 
+  bool get isFirstOrderButtonEnabled => !_showAllItems;
+
   void init(Flavour flavour) {
     _flavour = flavour;
     _selectedFlavours.add(flavour.name);
