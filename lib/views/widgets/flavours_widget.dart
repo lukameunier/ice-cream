@@ -28,29 +28,40 @@ class FlavoursWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Image(image: AssetImage("${"assets/"}$imagePath"), height: 50),
-              Text(flavourName, style: TextStyle(fontSize: fontSize)),
+              Image(image: AssetImage("assets/$imagePath"), height: 50),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Text(flavourName, style: TextStyle(fontSize: fontSize)),
+              ),
               ButtonWidget(flavourId: flavourId),
-
+              const SizedBox(width: 8),
               presenter.getAvailableScoops(flavourId) > 0
-                ? Text(
-                    presenter.getScoopCount(flavourId).toString(),
-                    style: TextStyle(fontSize: fontSize),
-                  )
-                : ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
-                      foregroundColor: Colors.white,
-                      shape: CircleBorder(),
-                      padding: EdgeInsets.all(12),
-                    ),
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/details', arguments: presenter.getFlavourById(flavourId));
-                    },
-                    child: Icon(Icons.highlight_off),
-                  ),
+                  ? SizedBox(
+                width: 40,
+                child: Text(
+                  presenter.getScoopCount(flavourId).toString(),
+                  style: TextStyle(fontSize: fontSize),
+                  textAlign: TextAlign.center,
+                ),
+              )
+                  : ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white,
+                  shape: const CircleBorder(),
+                  padding: EdgeInsets.zero,
+                  minimumSize: const Size(40, 40),
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    '/details',
+                    arguments: presenter.getFlavourById(flavourId),
+                  );
+                },
+                child: const Icon(Icons.highlight_off, size: 20),
+              ),
             ],
           ),
         ],

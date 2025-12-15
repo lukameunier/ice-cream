@@ -106,9 +106,7 @@ class HomePageWidget extends StatelessWidget {
                             ),
 
                             Text(
-                              container.type == ContainerType.cone
-                                  ? "Cone"
-                                  : "Cup",
+                              container.type.name,
                               style: TextStyle(
                                 fontSize: fontSizeText,
                                 color: enabled ? Colors.black : Colors.grey,

@@ -19,7 +19,7 @@ class ButtonWidget extends StatelessWidget {
         color: const Color(0xFFF5F5F5),
         borderRadius: BorderRadius.circular(999),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -29,25 +29,25 @@ class ButtonWidget extends StatelessWidget {
                 ? () => presenter.removeScoop(flavourId)
                 : null,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               child: Icon(
                 Icons.remove,
-                size: 20,
+                size: 16,
                 color: scoopCount > 0 ? Colors.black87 : Colors.black26,
               ),
             ),
           ),
 
-          Container(width: 1, height: 24, color: Colors.black12),
+          Container(width: 1, height: 16, color: Colors.black12),
 
           InkWell(
             borderRadius: BorderRadius.circular(999),
             onTap: canAdd ? () => presenter.addScoop(flavourId) : null,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               child: Icon(
                 Icons.add,
-                size: 20,
+                size: 16,
                 color: canAdd ? Colors.black87 : Colors.black26,
               ),
             ),
