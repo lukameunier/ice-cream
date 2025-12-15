@@ -46,9 +46,7 @@ class HomePagePresenter extends ChangeNotifier {
   }
 
   void addScoop(String flavourId) {
-    if (!canAddScoop) return;
-    final flavour = flavours.firstWhere((f) => f.id == flavourId);
-    if (flavour.isEmpty) return;
+    if (!canAddScoopForFlavour(flavourId)) return;
 
     _selectedScoops[flavourId] = getScoopCount(flavourId) + 1;
     notifyListeners();
@@ -107,4 +105,16 @@ class HomePagePresenter extends ChangeNotifier {
     if (value == null) return;
     selectContainer(value);
   }
+
+  int getAvailableScoops(String flavourId) {
+    final flavour = flavours.firstWhere((f) => f.id == flavourId);
+    final selected = getScoopCount(flavourId);
+
+    return flavour.availableScoops - selected;
+  }
+
+  bool canAddScoopForFlavour(String flavourId) {
+    return getAvailableScoops(flavourId) > 0 && canAddScoop;
+  }
+
 }

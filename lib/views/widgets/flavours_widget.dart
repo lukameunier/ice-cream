@@ -20,6 +20,8 @@ class FlavoursWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final presenter = context.watch<HomePagePresenter>();
 
+    final double fontSize = 15;
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -29,12 +31,24 @@ class FlavoursWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Image(image: AssetImage("${"assets/"}$imagePath"), height: 50),
-              Text(flavourName, style: TextStyle(fontSize: 20)),
+              Text(flavourName, style: TextStyle(fontSize: fontSize)),
               ButtonWidget(flavourId: flavourId),
-              Text(
-                presenter.getScoopCount(flavourId).toString(),
-                style: TextStyle(fontSize: 20),
-              ),
+
+              presenter.getAvailableScoops(flavourId) > 0
+                ? Text(
+                    presenter.getScoopCount(flavourId).toString(),
+                    style: TextStyle(fontSize: fontSize),
+                  )
+                : ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      foregroundColor: Colors.white,
+                      shape: CircleBorder(),
+                      padding: EdgeInsets.all(12),
+                    ),
+                    onPressed: () {},
+                    child: Icon(Icons.highlight_off),
+                  ),
             ],
           ),
         ],

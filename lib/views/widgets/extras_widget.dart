@@ -17,6 +17,9 @@ class ExtrasWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final double fontSize = 15;
+
     final presenter = context.watch<HomePagePresenter>();
     final isEnabled = presenter.totalScoops > 0;
 
@@ -30,7 +33,7 @@ class ExtrasWidget extends StatelessWidget {
         Text(
           extrasName,
           style: TextStyle(
-            fontSize: 20,
+            fontSize: fontSize,
             color: isEnabled ? Colors.black : Colors.grey,
           ),
         ),
@@ -38,7 +41,7 @@ class ExtrasWidget extends StatelessWidget {
         Text(
           "${price.toStringAsFixed(2)}€",
           style: TextStyle(
-            fontSize: 20,
+            fontSize: fontSize,
             color: isEnabled ? Colors.black : Colors.grey,
           ),
         ),

@@ -15,6 +15,10 @@ class HomePageWidget extends StatelessWidget {
 
     final enabled = presenter.totalScoops > 0;
 
+    final double fontSizeTitle = 35;
+    final double fontSizeMedium = 20;
+    final double fontSizeText = 15;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -23,31 +27,31 @@ class HomePageWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Ice cream", style: TextStyle(fontSize: 45)),
+              Text("Ice cream", style: TextStyle(fontSize: fontSizeTitle)),
 
               const SizedBox(height: 16),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     "Flavours",
-                    style: TextStyle(fontSize: 30),
+                    style: TextStyle(fontSize: fontSizeMedium),
                     textAlign: TextAlign.start,
                   ),
                   presenter.canAddScoop
-                      ? const Text(
+                      ? Text(
                           "maximum 5",
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: fontSizeText,
                             fontWeight: FontWeight.bold,
                           ),
                           textAlign: TextAlign.end,
                         )
-                      : const Text(
+                      : Text(
                           "Too many scooped",
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: fontSizeText,
                             fontWeight: FontWeight.bold,
                             color: Colors.red,
                           ),
@@ -73,7 +77,7 @@ class HomePageWidget extends StatelessWidget {
 
               Text(
                 "Containers",
-                style: TextStyle(fontSize: 30),
+                style: TextStyle(fontSize: fontSizeMedium),
                 textAlign: TextAlign.start,
               ),
 
@@ -106,7 +110,7 @@ class HomePageWidget extends StatelessWidget {
                                   ? "Cone"
                                   : "Cup",
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: fontSizeText,
                                 color: enabled ? Colors.black : Colors.grey,
                               ),
                             ),
@@ -116,7 +120,7 @@ class HomePageWidget extends StatelessWidget {
                                   ? "${container.price.toStringAsFixed(2)}€"
                                   : "Free",
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: fontSizeText,
                                 color: enabled ? Colors.black : Colors.grey,
                               ),
                             ),
@@ -129,7 +133,7 @@ class HomePageWidget extends StatelessWidget {
 
               Text(
                 "Extras",
-                style: TextStyle(fontSize: 30),
+                style: TextStyle(fontSize: fontSizeMedium),
                 textAlign: TextAlign.start,
               ),
               Column(
@@ -150,13 +154,13 @@ class HomePageWidget extends StatelessWidget {
                 children: [
                   Text(
                     "Price",
-                    style: TextStyle(fontSize: 30),
+                    style: TextStyle(fontSize: fontSizeMedium),
                     textAlign: TextAlign.start,
                   ),
                   Expanded(child: const SizedBox()),
                   Text(
                     "${presenter.totalPrice.toString()} €",
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: fontSizeMedium, fontWeight: FontWeight.bold),
                     textAlign: TextAlign.start,
                   ),
                 ],
